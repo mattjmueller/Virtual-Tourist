@@ -63,34 +63,7 @@ class TravelLocationsViewController: UIViewController, Persistable, MKMapViewDel
 		isEditingPins = false
 	}
 	
-	
-	//******************************************************
-	// MARK: - Helpers
-	//******************************************************
-	
-	func configureUI(editingPins: Bool) {
-		editButton.title = editingPins ? "Done" : "Edit"
-		deleteLabelHeightConstraint.constant = editingPins ? 60 : 0
-		view.setNeedsLayout()
-		UIView.animate(withDuration: 0.12) { _ in
-			self.view.layoutIfNeeded()
-		}
-	}
-	
-	func configureAnnotations() {
-		mapView.removeAnnotations(mapView.annotations)
-		mapView.addAnnotations(pinResultsController.fetchedObjects ?? [])
-	}
-	
-	func viewAlbum(forPin pin: Pin) {
-		let albumVC = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController
-		albumVC.modelController	= modelController
-		albumVC.selectedPin = pin
-		mapView.deselectAnnotation(pin, animated: false)
-		navigationController!.pushViewController(albumVC, animated: true)
-	}
-	
-	
+
 	//******************************************************
 	// MARK: - IB Actions
 	//******************************************************
@@ -122,6 +95,33 @@ class TravelLocationsViewController: UIViewController, Persistable, MKMapViewDel
 		default:
 			break
 		}
+	}
+	
+	
+	//******************************************************
+	// MARK: - Helpers
+	//******************************************************
+	
+	func configureUI(editingPins: Bool) {
+		editButton.title = editingPins ? "Done" : "Edit"
+		deleteLabelHeightConstraint.constant = editingPins ? 60 : 0
+		view.setNeedsLayout()
+		UIView.animate(withDuration: 0.12) { _ in
+			self.view.layoutIfNeeded()
+		}
+	}
+	
+	func configureAnnotations() {
+		mapView.removeAnnotations(mapView.annotations)
+		mapView.addAnnotations(pinResultsController.fetchedObjects ?? [])
+	}
+	
+	func viewAlbum(forPin pin: Pin) {
+		let albumVC = storyboard!.instantiateViewController(withIdentifier: "PhotoAlbumViewController") as! PhotoAlbumViewController
+		albumVC.modelController	= modelController
+		albumVC.selectedPin = pin
+		mapView.deselectAnnotation(pin, animated: false)
+		navigationController!.pushViewController(albumVC, animated: true)
 	}
 	
 

@@ -13,7 +13,6 @@ enum NetworkError: Error {
 	case noData
 }
 
-
 struct NetworkService {
 	func fetchContents(of url: URL, completionHandler: @escaping (Result<Data>) -> Void) {
 		fetchRequest(URLRequest(url: url), completionHandler: completionHandler)

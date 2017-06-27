@@ -21,9 +21,7 @@ precedencegroup ComposePrecedence {
 
 infix operator • : ComposePrecedence
 
-
 typealias Async<T, U> = (T, @escaping (Result<U>) -> Void) -> Void
-
 
 func compose<T, U, V>(_ f: @escaping Async<T, U>, _ g: @escaping Async<U, V>) -> Async<T, V> {
 	return { value, completionHandler in
